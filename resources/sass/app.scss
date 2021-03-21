@@ -1,0 +1,10 @@
+@import '~jquery-ui/themes/base/all.css';
+.ui-datepicker-header.ui-widget-header.ui-helper-clearfix.ui-corner-all {
+    background: #edf2f7 !important;
+}
+
+.modal-bg {
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+@import "node_modules/font-awesome/scss/font-awesome.scss";
