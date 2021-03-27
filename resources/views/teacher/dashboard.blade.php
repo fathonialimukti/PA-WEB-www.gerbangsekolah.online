@@ -1,12 +1,12 @@
 <div class="w-full block mt-8">
-    <div class="flex flex-wrap sm:flex-no-wrap justify-between">
-        <div class="w-full bg-gray-200 text-center border border-gray-300 px-8 py-6 rounded">
+    <div class="grid grid-flow-col grid-cols-1 grid-rows-2 md:grid-cols-2 md:grid-rows-1 gap-4">
+        <div class="w-full bg-blue-100 text-center border border-blue-300 px-8 py-6 rounded">
             <h3 class="text-gray-700 uppercase font-bold">
                 <span class="leading-tight">Jumlah Kelas yang Diampu : </span>
                 <span class="text-4xl">{{ sprintf("%d", $teacher->grades->count()) }}</span>
             </h3>
         </div>
-        <div class="w-full bg-gray-200 text-center border border-gray-300 px-8 py-6 rounded">
+        <div class="w-full bg-blue-100 text-center border border-blue-300 px-8 py-6 rounded">
             <h3 class="text-gray-700 uppercase font-bold">
                 <span class="leading-tight">Mata Pelajaran : </span>
                 <span class="text-4xl">{{ $teacher->subject }}</span>

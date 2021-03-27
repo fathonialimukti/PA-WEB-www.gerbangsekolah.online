@@ -33,7 +33,7 @@ class StudentController extends Controller
     public function create()
     {
         $classes = Grade::latest()->get();
-        
+
         return view('admin.students.create', compact('classes'));
     }
 
@@ -77,6 +77,7 @@ class StudentController extends Controller
         } else {
             $profile = 'avatar.png';
         }
+
         $user->update([
             'profile_picture' => $profile
         ]);
@@ -94,6 +95,8 @@ class StudentController extends Controller
 
         $user->assignRole('Student');
 
+        Alert::toast('Account student "'.$user->name.'" created','success');
+        
         return redirect()->route('student.index');
     }
 
@@ -104,8 +107,7 @@ class StudentController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show(Student $student)
-    {       
-         
+    {
         return view('admin.students.show', compact('student'));
     }
 
@@ -174,6 +176,7 @@ class StudentController extends Controller
             'permanent_address' => $request->permanent_address
         ]);
 
+        Alert::toast('Account student "'.$student->user->name.'" updated','success');
         return redirect()->route('student.index');
     }
 
@@ -198,8 +201,7 @@ class StudentController extends Controller
             }
         }
 
-        Alert::toast('Account '.$user->name.' deleted','success');
-
+        Alert::toast('Account student "'.$user->name.'" deleted','success');
         return redirect()->route('student.index');
     }
 }

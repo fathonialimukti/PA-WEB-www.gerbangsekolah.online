@@ -38,12 +38,13 @@ require('./bootstrap');
     Swal.fire({
         icon: 'warning',
         text: 'Do you want to delete ' + name,
-        showCancelButton: true,
         confirmButtonText: 'Delete',
         confirmButtonColor: '#e3342f',
+        showCancelButton: true,
     }).then((result) => {
         if (result.isConfirmed) {
             document.getElementById(formId).submit();
         }
     });
 }
+
