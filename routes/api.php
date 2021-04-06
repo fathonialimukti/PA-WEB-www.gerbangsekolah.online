@@ -5,6 +5,5 @@ Route::post('login', 'Auth\AuthAPIController@login');
 Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::get('profile', 'Auth\AuthAPIController@profile');
     Route::get('logout', 'Auth\AuthAPIController@logout');
-    Route::get('get-grades','Auth\AuthAPIController@grades');
 });
 

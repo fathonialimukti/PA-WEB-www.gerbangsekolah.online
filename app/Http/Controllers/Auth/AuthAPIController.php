@@ -42,7 +42,10 @@ class AuthAPIController extends Controller
 
     public function profile()
     {
-        $this->response = auth()->user();
+        $this->response['id']   = auth()->user()->id;
+        $this->response['name']   = auth()->user()->name;
+        $this->response['email']   = auth()->user()->email;
+        $this->response['profile_picture']   = auth()->user()->profile_picture;
 
         //check isTeacher
         if(auth()->user()->roles->pluck( 'name' )->contains( 'Teacher' )){
@@ -50,19 +53,9 @@ class AuthAPIController extends Controller
             $this->response['grades']       = auth()->user()->teacher->grades;
         } else {
             $this->response['isTeacher']    = false;
-            $this->response['grades']       = auth()->user()->student->grade;
+            $this->response['grades']        = auth()->user()->student->grade;
         }
 
-        return response()->json($this->response, 200);
-    }
-
-    public function grades()
-    {
-        if(auth()->user()->roles->pluck( 'name' )->contains( 'Teacher' )){
-            $this->response = auth()->user()->teacher->grades;
-        } else {
-            $this->response = auth()->user()->student->grade;
-        }
         return response()->json($this->response, 200);
     }
 
