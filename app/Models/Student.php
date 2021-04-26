@@ -18,22 +18,22 @@ class Student extends Model
         'address',
     ];
 
-    public function user() 
+    public function user()
     {
         return $this->belongsTo(User::class);
     }
 
-    public function grade() 
+    public function grade()
     {
         return $this->belongsTo(Grade::class, 'class_id');
     }
 
     public function assignment()
     {
-        return $this->hasMany(Assignment_file::class);
+        return $this->hasMany(AssignmentFile::class);
     }
 
-    // public function attendances() 
+    // public function attendances()
     // {
     //     return $this->hasMany(Attendance::class);
     // }

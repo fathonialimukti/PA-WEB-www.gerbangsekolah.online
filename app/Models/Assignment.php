@@ -13,18 +13,18 @@ class Assignment extends Model
         'description',
     ];
 
-    public function grade() 
+    public function grade()
     {
         return $this->belongsTo(Grade::class, 'grade_id');
     }
 
-    public function teacher() 
+    public function teacher()
     {
         return $this->belongsTo(Teacher::class, 'teacher_id');
     }
 
-    public function files() 
+    public function files()
     {
-        return $this->hasMany(Assignment_file::class);
+        return $this->hasMany(AssignmentFile::class);
     }
 }

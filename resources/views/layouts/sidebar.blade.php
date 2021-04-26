@@ -1,5 +1,5 @@
 <div class="w-full md:w-1/6 bg-gray-200 md:bg-gray-200 px-2 text-center fixed bottom-0 md:pt-0 md:top-0 md:left-0 h-10 md:h-screen">
-   
+
    <div class="md:mb-6 md:mt-20 px-6">
 
       <ul class="list-reset flex flex-row md:flex-col text-center md:text-left">
@@ -77,6 +77,18 @@
          </li>
          @endrole
 
-      </ul> 
+         @role('Student')
+         <li class="flex-1">
+            <a href="{{ route('payment.show',auth()->user()->student->id) }}" class="flex justify-center md:justify-start text-gray-600 py-2 hover:text-blue-700">
+               <svg class="h-4 w-4 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                  <path d="M9 2a2 2 0 00-2 2v8a2 2 0 002 2h6a2 2 0 002-2V6.414A2 2 0 0016.414 5L14 2.586A2 2 0 0012.586 2H9z" />
+                  <path d="M3 8a2 2 0 012-2v10h8a2 2 0 01-2 2H5a2 2 0 01-2-2V8z" />
+                </svg>
+               <span class="hidden sm:block ml-2 text-sm font-semibold">SPP</span>
+           </a>
+         </li>
+         @endrole
+
+      </ul>
    </div>
 </div>

@@ -5,9 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\Grade;
 use App\Models\Teacher;
 use App\Models\Assignment;
-use App\Models\Assignment_file;
+use App\Models\AssignmentFile;
 use App\Models\Student;
-use Illuminate\Support\Facades\File; 
+use Illuminate\Support\Facades\File;
 use Illuminate\Http\Request;
 
 class AssignmentController extends Controller
@@ -59,7 +59,7 @@ class AssignmentController extends Controller
         ]);
 
         foreach($grade->students as $student){
-            Assignment_file::create([
+            AssignmentFile::create([
                 'assignment_id' => $assignment->id,
                 'student_id'    => $student->id,
             ]);
@@ -91,21 +91,6 @@ class AssignmentController extends Controller
         return view('teacher.assignment.show', compact('assignment'));
     }
 
-    public function update_virtual_classroom(Request $request, $id)
-    {
-        $request->validate([
-            'virtual_classroom' => 'required|string|max:2083'
-        ]);
-
-        $class = Grade::findOrFail($id);
-
-        $class->update([
-            'virtual_classroom' => $request->virtual_classroom
-        ]);
-
-        return redirect()->route('assignment-manager.index');
-    }
-
     /**
      * Remove the specified resource from storage.
      *
@@ -115,10 +100,10 @@ class AssignmentController extends Controller
     public function destroy($id)
     {
         $assignment = Assignment::findOrFail($id);
-        foreach($assignment->files as $assignment_file)
+        foreach($assignment->files as $AssignmentFile)
         {
-            File::delete('assignment/'.$assignment_file->file);
-            $assignment_file->delete();
+            File::delete('assignment/'.$AssignmentFile->file);
+            $AssignmentFile->delete();
         }
         $assignment->delete();
 
@@ -136,8 +121,8 @@ class AssignmentController extends Controller
 
     public function submit($id)
     {
-        $assignment_file = Assignment_file::findOrFail($id);
-        return view('student.assignment.submit', compact('assignment_file'));
+        $AssignmentFile = AssignmentFile::findOrFail($id);
+        return view('student.assignment.submit', compact('AssignmentFile'));
     }
 
     public function store_assignment(Request $request, $assignment_id, $assignment_title)
@@ -147,11 +132,11 @@ class AssignmentController extends Controller
             'file'      => 'required|max:10000'//max 10Mb add mimes:doc,docx for extension type
         ]);
 
-        $assignment_file = Assignment_file::where([['assignment_id',$assignment_id],['student_id',auth()->user()->student->id]]);
+        $AssignmentFile = AssignmentFile::where([['assignment_id',$assignment_id],['student_id',auth()->user()->student->id]]);
         $file           = auth()->user()->name.'-'.$assignment_title.'.'.$request->file->getClientOriginalExtension();
         $request->file->move(public_path('assignment'), $file);
 
-        $assignment_file->update([
+        $AssignmentFile->update([
             'note'      => $request->note,
             'file'      => $file
         ]);
@@ -166,11 +151,10 @@ class AssignmentController extends Controller
 
     public function score($id, Request $request)
     {
-
         $request->validate([
             'score' => 'required|numeric|max:100'
         ]);
-        Assignment_file::findOrFail($id)->update([
+        AssignmentFile::findOrFail($id)->update([
             'score' => $request->score
         ]);
         return redirect()->back();

@@ -24,7 +24,7 @@ Route::put('/profile/update', 'HomeController@profileUpdate')->name('profile.upd
 Route::get('/profile/changepassword', 'HomeController@changePasswordForm')->name('profile.change.password');
 Route::post('/profile/changepassword', 'HomeController@changePassword')->name('profile.changepassword');
 
-Route::group(['middleware' => ['auth','role:Admin']], function () 
+Route::group(['middleware' => ['auth','role:Admin']], function ()
 {
     // Route::get('/roles-permissions', 'RolePermissionController@roles')->name('roles-permissions');
     // Route::get('/role-create', 'RolePermissionController@createRole')->name('role.create');
@@ -45,7 +45,7 @@ Route::group(['middleware' => ['auth','role:Admin']], function ()
 
 });
 
-Route::group(['middleware' => ['auth','role:Teacher']], function () 
+Route::group(['middleware' => ['auth','role:Teacher']], function ()
 {
     // Route::post('attendance', 'AttendanceController@store')->name('teacher.attendance.store');
     // Route::get('attendance-create/{classid}', 'AttendanceController@createByTeacher')->name('teacher.attendance.create');
@@ -56,12 +56,12 @@ Route::group(['middleware' => ['auth','role:Teacher']], function ()
     Route::post('assignment-manager/create/store/{id}','AssignmentController@store')->name('assignment-manager.store-assignment');
     Route::get('assignment-manager/download/{file}', 'AssignmentController@download_file')->name('assignment-manager.download');
     Route::post('assignment-manager/scoring/{id}','AssignmentController@score')->name('assignment-manager.scoring');
-    
+
     //Virtual Classroom
-    Route::post('/home/update-virtual-classroom/{id}','GradeController@update_virtual_classroom')->name('update-virtual-classroom');
+    Route::post('/home/update-virtual-classroom/{id}','GradeController@updateVirtualClassroom')->name('update-virtual-classroom');
 });
 
-Route::group(['middleware' => ['auth','role:Student']], function () 
+Route::group(['middleware' => ['auth','role:Student']], function ()
 {
     //Assignment
     Route::get('assignments', 'AssignmentController@student')->name('assignment.student');
@@ -69,3 +69,8 @@ Route::group(['middleware' => ['auth','role:Student']], function ()
     Route::post('assignments/store{assignment_id}&{assignment_title}', 'AssignmentController@store_assignment')->name('assignment.store-assignment');
 });
 
+// now for payment system
+
+Route::group(['middleware' => 'auth'], function (){
+    Route::get('payment/show/{id}', 'PaymentController@show')->name('payment.show');
+});

@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Assignment_file extends Model
+class AssignmentFile extends Model
 {
     protected $fillable = [
         'assignment_id',
@@ -14,12 +14,12 @@ class Assignment_file extends Model
         'score',
     ];
 
-    public function assignment() 
+    public function assignment()
     {
         return $this->belongsTo(Assignment::class, 'assignment_id');
     }
 
-    public function student() 
+    public function student()
     {
         return $this->belongsTo(Student::class, 'student_id');
     }

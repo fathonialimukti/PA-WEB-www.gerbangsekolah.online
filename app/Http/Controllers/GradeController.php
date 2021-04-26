@@ -27,7 +27,7 @@ class GradeController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create()
-    {        
+    {
         $teachers = Teacher::latest()->get();
         return view('admin.classes.create', compact('teachers'));
     }
@@ -105,12 +105,12 @@ class GradeController extends Controller
         ]);
 
         $class->teachers()->sync($request->selectedteachers);
-        
+
         Alert::toast('Class '.$class->class_name.' updated','success');
         return redirect()->route('grade.index');
     }
 
-    public function update_virtual_classroom(Request $request, $id)
+    public function updateVirtualClassroom(Request $request, $id)
     {
         $request->validate([
             'virtual_classroom' => 'required|string|max:2083'

@@ -13,7 +13,7 @@ class CreateAssignmentFilesTable extends Migration
      */
     public function up()
     {
-        Schema::create('assignment_files', function (Blueprint $table) {
+        Schema::create('AssignmentFiles', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
             $table->foreignId('assignment_id')->references('id')->on('assignments')->onDelete('cascade');;
@@ -31,6 +31,6 @@ class CreateAssignmentFilesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('assignment_files');
+        Schema::dropIfExists('AssignmentFiles');
     }
 }
