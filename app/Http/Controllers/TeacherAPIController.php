@@ -84,4 +84,9 @@ class TeacherAPIController extends Controller
         $this->response = $collection;
         return response()->json($this->response,200);
     }
+
+    public function downloadFile($file)
+    {
+        return response()->download(public_path('assignment/'.$file));
+    }
 }

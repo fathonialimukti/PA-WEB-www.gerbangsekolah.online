@@ -54,7 +54,7 @@ Route::group(['middleware' => ['auth','role:Teacher']], function ()
     Route::resource('assignment-manager', 'AssignmentController');
     Route::get('assignment-manager/create/{id}', 'AssignmentController@create')->name('assignment-manager.create-assignment');
     Route::post('assignment-manager/create/store/{id}','AssignmentController@store')->name('assignment-manager.store-assignment');
-    Route::get('assignment-manager/download/{file}', 'AssignmentController@download_file')->name('assignment-manager.download');
+    Route::get('assignment-manager/download/{file}', 'AssignmentController@downloadFile')->name('assignment-manager.download');
     Route::post('assignment-manager/scoring/{id}','AssignmentController@score')->name('assignment-manager.scoring');
 
     //Virtual Classroom

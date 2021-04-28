@@ -144,7 +144,7 @@ class AssignmentController extends Controller
         return redirect()->route('assignment.student');
     }
 
-    public function download_file($file)
+    public function downloadFile($file)
     {
         return response()->download(public_path('assignment/'.$file));
     }
