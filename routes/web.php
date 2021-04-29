@@ -66,7 +66,7 @@ Route::group(['middleware' => ['auth','role:Student']], function ()
     //Assignment
     Route::get('assignments', 'AssignmentController@student')->name('assignment.student');
     Route::get('assignments/submit/{id}', 'AssignmentController@submit')->name('assignment.submit');
-    Route::post('assignments/store=?{assignmentId}', 'AssignmentController@store_assignment')->name('assignment.store-assignment');
+    Route::post('assignments/submit-assignment/{id}', 'AssignmentController@submitAssignment')->name('assignment.submit-assignment');
 });
 
 // now for payment system

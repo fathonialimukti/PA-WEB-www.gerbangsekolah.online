@@ -125,15 +125,16 @@ class AssignmentController extends Controller
         return view('student.assignment.submit', compact('AssignmentFile'));
     }
 
-    public function store_assignment(Request $request, $assignmentId)
+    public function submitAssignment(Request $request, $id)
     {
         $request->validate([
             'note'      => 'nullable|string|max:255',
             'file'      => 'required|max:10000'//max 10Mb add mimes:doc,docx for extension type
         ]);
 
-        $AssignmentFile = AssignmentFile::where([['assignment_id',$assignmentId],['student_id',auth()->user()->student->id]])->get();
-        $file           = auth()->user()->name.'-'.Assignment::findOrFail($assignmentId)->title.'.'.$request->file->getClientOriginalExtension();
+        $AssignmentFile = AssignmentFile::where([['assignment_id',$id],['student_id',auth()->user()->student->id]])->firstOrFail();
+        File::delete('assignment/'.$AssignmentFile->file);
+        $file           = auth()->user()->name.'-'.Assignment::findOrFail($id)->title.'.'.$request->file->getClientOriginalExtension();
         $request->file->move(public_path('assignment'), $file);
 
         $AssignmentFile->update([
