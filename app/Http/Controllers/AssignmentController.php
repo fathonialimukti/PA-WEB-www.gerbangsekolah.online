@@ -132,7 +132,7 @@ class AssignmentController extends Controller
             'file'      => 'required|max:10000'//max 10Mb add mimes:doc,docx for extension type
         ]);
 
-        $AssignmentFile = AssignmentFile::where([['assignment_id',$assignmentId],['student_id',auth()->user()->student->id]]);
+        $AssignmentFile = AssignmentFile::where([['assignment_id',$assignmentId],['student_id',auth()->user()->student->id]])->get();
         $file           = auth()->user()->name.'-'.Assignment::findOrFail($assignmentId)->title.'.'.$request->file->getClientOriginalExtension();
         $request->file->move(public_path('assignment'), $file);
 
