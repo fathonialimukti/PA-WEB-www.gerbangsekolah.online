@@ -1,7 +1,8 @@
 /node_modules
 /storage/*.key
 /vendor
-/public/assignment
+/public/assignment/*
+/public/images/profile/*
 .env
 .env.backup
 .phpunit.result.cache

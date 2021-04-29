@@ -15,7 +15,7 @@
         </div>
 
         <div class="table w-full mt-8 bg-white rounded">
-            <form action="{{ route('assignment.store-assignment',['assignment_id'=>$AssignmentFile->assignment->id,'assignment_title'=>$AssignmentFile->assignment->title]) }}" method="post" class="w-full max-w-xl px-6 py-12" enctype="multipart/form-data">
+            <form action="{{ route('assignment.store-assignment',$AssignmentFile->assignment->id }}" method="post" class="w-full max-w-xl px-6 py-12" enctype="multipart/form-data">
                 @csrf
                 <div class="md:flex md:items-center mb-6">
                     <div class="md:w-1/3">
