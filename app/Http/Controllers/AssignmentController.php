@@ -129,7 +129,7 @@ class AssignmentController extends Controller
     {
         $request->validate([
             'note'      => 'nullable|string|max:255',
-            'file'      => 'required|max:10000'//max 10Mb add mimes:doc,docx for extension type
+            'file'      => 'required|max:10000|mimes:pdf'//max 10Mb add mimes:doc,docx for extension type and must be pdf
         ]);
 
         $AssignmentFile = AssignmentFile::where([['assignment_id',$id],['student_id',auth()->user()->student->id]])->firstOrFail();
