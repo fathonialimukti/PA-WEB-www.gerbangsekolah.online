@@ -21,7 +21,7 @@ class AssignmentController extends Controller
     public function index()
     {
         $teacher = Teacher::findOrFail(auth()->user()->teacher->id);
-        return view('teacher.assignment.index',compact('teacher'));
+        return view('teacher.assignment.index', compact('teacher'));
     }
 
     /**
@@ -42,7 +42,7 @@ class AssignmentController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request,$id)
+    public function store(Request $request, $id)
     {
         $request->validate([
             'title'         => 'required|string|max:255|unique:assignments,title',
@@ -58,7 +58,7 @@ class AssignmentController extends Controller
             'grade_id'      => $grade->id,
         ]);
 
-        foreach($grade->students as $student){
+        foreach ($grade->students as $student) {
             AssignmentFile::create([
                 'assignment_id' => $assignment->id,
                 'student_id'    => $student->id,
@@ -100,14 +100,13 @@ class AssignmentController extends Controller
     public function destroy($id)
     {
         $assignment = Assignment::findOrFail($id);
-        foreach($assignment->files as $AssignmentFile)
-        {
-            File::delete('assignment/'.$AssignmentFile->file);
+        foreach ($assignment->files as $AssignmentFile) {
+            File::delete('assignment/' . $AssignmentFile->file);
             $AssignmentFile->delete();
         }
         $assignment->delete();
 
-        return back()->with('success','Assignment deleted successfully');
+        return back()->with('success', 'Assignment deleted successfully');
     }
 
 
@@ -116,7 +115,7 @@ class AssignmentController extends Controller
     public function student()
     {
         $student = Student::findOrFail(auth()->user()->student->id);
-        return view('student.assignment.index',compact('student'));
+        return view('student.assignment.index', compact('student'));
     }
 
     public function submit($id)
@@ -129,12 +128,12 @@ class AssignmentController extends Controller
     {
         $request->validate([
             'note'      => 'nullable|string|max:255',
-            'file'      => 'required|max:10000|mimes:pdf'//max 10Mb add mimes:doc,docx for extension type and must be pdf
+            'file'      => 'required|max:10000|mimes:pdf' //max 10Mb add mimes:doc,docx for extension type and must be pdf
         ]);
 
-        $AssignmentFile = AssignmentFile::where([['assignment_id',$id],['student_id',auth()->user()->student->id]])->firstOrFail();
-        File::delete('assignment/'.$AssignmentFile->file);
-        $file           = auth()->user()->name.'-'.Assignment::findOrFail($id)->title.'.'.$request->file->getClientOriginalExtension();
+        $AssignmentFile = AssignmentFile::where([['assignment_id', $id], ['student_id', auth()->user()->student->id]])->firstOrFail();
+        File::delete('assignment/' . $AssignmentFile->file);
+        $file           = auth()->user()->name . '-' . Assignment::findOrFail($id)->title . '.' . $request->file->getClientOriginalExtension();
         $request->file->move(public_path('assignment'), $file);
 
         $AssignmentFile->update([
@@ -147,7 +146,7 @@ class AssignmentController extends Controller
 
     public function downloadFile($file)
     {
-        return response()->download(public_path('assignment/'.$file));
+        return response()->download(public_path('assignment/' . $file));
     }
 
     public function score($id, Request $request)
