@@ -75,13 +75,18 @@ class TeacherAPIController extends Controller
         $assignment = Assignment::findOrFail($id);
 
         $collection = new Collection([]);
-        foreach ($assignment->files as $item) {
-            $temp   =   $item;
-            $temp['student_name'] = $item->student->user->name;
+        foreach ($assignment->files as $AssignmentFile)
+        {
+            $temp['id'] = $AssignmentFile->id;
+            $temp['student_name'] = $AssignmentFile->student->user->name;
+            $temp['score'] = $AssignmentFile->score;
+            $temp['note'] = $AssignmentFile->note;
+            $temp['file'] = $AssignmentFile->file;
             $collection->push($temp);
         }
 
         $this->response = $collection;
+
         return response()->json($this->response,200);
     }
 

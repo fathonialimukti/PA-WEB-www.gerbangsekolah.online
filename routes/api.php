@@ -13,7 +13,11 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::post('teacher/delete-assignment', 'TeacherAPIController@deleteAssignment');
     Route::get('teacher/get-assignment-files/{id}', 'TeacherAPIController@getAssignmentFile');
     Route::get('teacher/download/{file}', 'TeacherAPIController@downloadFile');
+
     // Student Act
+    Route::get('student/get-teachers', 'StudentApiController@getTeachers');
+    Route::get('student/get-assignment', 'StudentApiController@getAssignment');
+
     }
 );
 
