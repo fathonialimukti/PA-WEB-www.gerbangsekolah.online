@@ -12,7 +12,7 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::post('teacher/create-assignment', 'TeacherAPIController@createAssignment');
     Route::post('teacher/delete-assignment', 'TeacherAPIController@deleteAssignment');
     Route::get('teacher/get-assignment-files/{id}', 'TeacherAPIController@getAssignmentFile');
-    Route::get('teacher/download/{file}', 'TeacherAPIController@downloadFile');
+    Route::post('teacher/scoring-assignment', 'TeacherAPIController@scoringAssignment');
 
     // Student Act
     Route::get('student/get-teachers', 'StudentApiController@getTeachers');

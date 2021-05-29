@@ -91,8 +91,15 @@ class TeacherAPIController extends Controller
         return response()->json($this->response,200);
     }
 
-    public function downloadFile($file)
+    public function scoringAssignment(Request $request)
     {
-        return response()->download(public_path('assignment/'.$file));
+        $request->validate([
+            'assignmentId'  => 'required|numeric|max:100',
+            'score'         => 'required|numeric|max:100',
+        ]);
+        AssignmentFile::findOrFail($request->assignmentId)->update([
+            'score' => $request->score
+        ]);
+        return redirect()->back();
     }
 }
