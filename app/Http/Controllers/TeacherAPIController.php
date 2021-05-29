@@ -82,6 +82,7 @@ class TeacherAPIController extends Controller
             $temp['score'] = $AssignmentFile->score;
             $temp['note'] = $AssignmentFile->note;
             $temp['file'] = $AssignmentFile->file;
+            $temp['assignment_id'] = $AssignmentFile->assignment->id;
             $collection->push($temp);
         }
 

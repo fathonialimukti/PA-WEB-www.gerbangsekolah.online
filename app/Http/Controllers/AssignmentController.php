@@ -133,20 +133,20 @@ class AssignmentController extends Controller
 
         $AssignmentFile = AssignmentFile::where([['assignment_id', $id], ['student_id', auth()->user()->student->id]])->firstOrFail();
         File::delete('assignment/' . $AssignmentFile->file);
-        $file           = auth()->user()->name . '-' . Assignment::findOrFail($id)->title . '.' . $request->file->getClientOriginalExtension();
-        $request->file->move(public_path('assignment'), $file);
+        $filename       = auth()->user()->name . '-' . Assignment::findOrFail($id)->title . '.' . $request->file->getClientOriginalExtension();
+        $request->file->move(public_path('assignment'), $filename);
 
         $AssignmentFile->update([
             'note'      => $request->note,
-            'file'      => $file
+            'file'      => $filename
         ]);
 
         return redirect()->route('assignment.student');
     }
 
-    public function downloadFile($file)
+    public function downloadFile($filename)
     {
-        return response()->download(public_path('assignment/' . $file));
+        return response()->download(public_path('assignment/' . $filename));
     }
 
     public function score($id, Request $request)
