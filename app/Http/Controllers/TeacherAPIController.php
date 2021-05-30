@@ -94,12 +94,12 @@ class TeacherAPIController extends Controller
     public function scoringAssignment(Request $request)
     {
         $request->validate([
-            'assignmentId'  => 'required|numeric|max:100',
-            'score'         => 'required|numeric|max:100',
+            'assignmentId'  => 'required',
+            'score'         => 'required',
         ]);
         AssignmentFile::findOrFail($request->assignmentId)->update([
             'score' => $request->score
         ]);
-        return redirect()->back();
+        return response()->json("success",200);
     }
 }
