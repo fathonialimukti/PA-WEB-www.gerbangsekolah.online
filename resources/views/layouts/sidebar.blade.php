@@ -75,10 +75,8 @@
                <span class="hidden sm:block ml-2 text-sm font-semibold">Tugas Kelas</span>
            </a>
          </li>
-         @endrole
-
-         @role('Student')
-         <li class="flex-1">
+         
+         {{-- <li class="flex-1">
             <a href="{{ route('payment.show',auth()->user()->student->id) }}" class="flex justify-center md:justify-start text-gray-600 py-2 hover:text-blue-700">
                <svg class="h-4 w-4 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
                   <path d="M9 2a2 2 0 00-2 2v8a2 2 0 002 2h6a2 2 0 002-2V6.414A2 2 0 0016.414 5L14 2.586A2 2 0 0012.586 2H9z" />
@@ -86,7 +84,7 @@
                 </svg>
                <span class="hidden sm:block ml-2 text-sm font-semibold">SPP</span>
            </a>
-         </li>
+         </li> --}}
          @endrole
 
       </ul>
