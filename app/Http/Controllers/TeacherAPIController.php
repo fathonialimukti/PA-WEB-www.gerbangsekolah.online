@@ -32,7 +32,7 @@ class TeacherAPIController extends Controller
     public function createAssignment(Request $request)
     {
         $request->validate([
-            'title'         => 'required|string|max:255|unique:assignments,title',
+            'title'         => 'required|string|unique:assignments,title',
         ]);
 
         $grade = Grade::findOrFail($request->gradeId);
@@ -94,10 +94,10 @@ class TeacherAPIController extends Controller
     public function scoringAssignment(Request $request)
     {
         $request->validate([
-            'assignmentId'  => 'required',
+            'assignmentFileId'  => 'required',
             'score'         => 'required',
         ]);
-        AssignmentFile::findOrFail($request->assignmentId)->update([
+        AssignmentFile::findOrFail($request->assignmentFileId)->update([
             'score' => $request->score
         ]);
         return response()->json("success",200);
