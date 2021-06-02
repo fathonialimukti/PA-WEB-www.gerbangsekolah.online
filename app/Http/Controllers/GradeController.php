@@ -52,7 +52,7 @@ class GradeController extends Controller
             'virtual_classroom' => $request->virtual_classroom
         ])->teachers()->attach($request->selectedteachers);
 
-        Alert::toast('class '.$request->class_name.' created', 'success');
+        Alert::toast('Berhasil menambahkan '.$request->class_name,'success');
         return redirect()->route('grade.index');
     }
 
@@ -106,7 +106,7 @@ class GradeController extends Controller
 
         $class->teachers()->sync($request->selectedteachers);
 
-        Alert::toast('Class '.$class->class_name.' updated','success');
+        Alert::toast('Perubahan terhadap '.$class->class_name.' berhasil','success');
         return redirect()->route('grade.index');
     }
 
@@ -121,7 +121,7 @@ class GradeController extends Controller
             'virtual_classroom' => $request->virtual_classroom
         ]);
 
-        Alert::toast('Class '.$class->class_name.' updated','success');
+        Alert::toast('Perubahan terhadap '.$class->class_name.' berhasil','success');
         return redirect()->route('home');
     }
 
@@ -133,9 +133,10 @@ class GradeController extends Controller
      */
     public function destroy($id)
     {
-        Grade::findOrFail($id)->delete();
+        $grade = Grade::findOrFail($id);
+        Alert::toast($grade->class_name.' berhasil dihapus','success');
+        $grade->delete();
 
-        Alert::toast('Class deleted','success');
         return back();
     }
 }

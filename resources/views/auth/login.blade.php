@@ -4,8 +4,8 @@
 
 <main class="bg-white max-w-lg mx-auto p-8 md:p-12 my-10 rounded-lg shadow-2xl">
     <section>
-        <h3 class="font-bold text-2xl">Welcome to Gerbang Sekolah</h3>
-        <p class="text-gray-600 pt-2">Sign in to your account.</p>
+        <h3 class="text-2xl">Sistem Pembelajaran Online</h3>
+        <h1 class="font-bold text-3xl">Gerbang Sekolah</h1>
     </section>
 
     <section class="mt-10">
@@ -29,13 +29,13 @@
                 <label class="block text-gray-500 font-bold">
                     <input class="mr-2 leading-tight" type="checkbox" name="remember" {{ old('remember') ? 'checked' : '' }}>
                     <span class="text-sm">
-                        Remember Me
+                        Tetap Log In
                     </span>
                 </label>
             </div>
-            <div class="flex justify-end">
+            {{-- <div class="flex justify-end">
                 <a href="#" class="text-sm text-blue-500 hover:text-blue-700 hover:underline mb-6">Forgot your password?</a>
-            </div>
+            </div> --}}
             <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 rounded shadow-lg hover:shadow-xl transition duration-200" type="submit">Sign In</button>
         </form>
     </section>
