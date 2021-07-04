@@ -13,6 +13,13 @@
                 </a>
             </div>
         </div>
+
+        <div class="px-8">
+            <form action="/search/student" method="GET">
+              <input class="bg-white flex items-center rounded-full shadow-xl w-full py-4 px-6 text-gray-700 leading-tight focus:outline-none" name="search" type="text" placeholder="{{ $search }}">
+            </form>
+        </div>
+
         <div class="mt-8 bg-white rounded border-b-4 border-gray-300">
             <div class="flex flex-wrap items-center uppercase text-sm font-semibold bg-gray-300 text-gray-600 rounded-tl rounded-tr">
                 <div class="w-3/12 px-4 py-3">Nama</div>

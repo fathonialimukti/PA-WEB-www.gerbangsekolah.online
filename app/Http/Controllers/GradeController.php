@@ -6,6 +6,7 @@ use App\Models\Grade;
 use App\Models\Teacher;
 use Illuminate\Http\Request;
 use RealRashid\SweetAlert\Facades\Alert;
+use Illuminate\Support\Facades\DB;
 
 class GradeController extends Controller
 {
@@ -16,9 +17,17 @@ class GradeController extends Controller
      */
     public function index()
     {
-        $classes = Grade::withCount('students')->latest()->paginate(10);
+        $search = 'Cari';
+        $classes = Grade::withCount('students')->orderBy('class_name', 'asc')->paginate(20);
 
-        return view('admin.classes.index', compact('classes'));
+        return view('admin.classes.index', compact('classes', 'search'));
+    }
+
+    public function search(Request $request)
+    {
+        $search = $request->search;
+        $classes = Grade::withCount('students')->orderBy('class_name', 'asc')->where('class_name', 'LIKE', '%'.$search.'%')->paginate(10);
+        return view('admin.classes.index', compact('classes', 'search'));
     }
 
     /**
@@ -56,12 +65,6 @@ class GradeController extends Controller
         return redirect()->route('grade.index');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Grade  $grade
-     * @return \Illuminate\Http\Response
-     */
     public function show(Grade $grade)
     {
         return view('admin.classes.show',compact('grade'));

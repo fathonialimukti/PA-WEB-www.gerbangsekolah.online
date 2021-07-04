@@ -41,7 +41,10 @@ Route::group(['middleware' => ['auth','role:Admin']], function ()
     Route::resource('grade', 'GradeController');
     Route::resource('teacher', 'TeacherController');
     Route::resource('student', 'StudentController');
-    Route::get('attendance', 'AttendanceController@index')->name('attendance.index');
+
+    Route::get('/search/grade', 'GradeController@search');
+    Route::get('/search/student', 'StudentController@search');
+    // Route::get('attendance', 'AttendanceController@index')->name('attendance.index');
 
 });
 

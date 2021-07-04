@@ -21,8 +21,19 @@ class StudentController extends Controller
     public function index()
     {
         $students = Student::with('grade')->latest()->paginate(30);
+        $search = '';
 
-        return view('admin.students.index', compact('students'));
+        return view('admin.students.index', compact('students', 'search'));
+    }
+
+    public function search(Request $request)
+    {
+        $search = $request->search;
+        $students = Student::whereHas('user', function($query) use ($search) {
+            $query->where('name', 'LIKE', '%'.$search.'%');
+        })->paginate(10);
+
+        return view('admin.students.index', compact('students', 'search'));
     }
 
     /**
@@ -96,7 +107,7 @@ class StudentController extends Controller
         $user->assignRole('Student');
 
         Alert::toast('Account student "'.$user->name.'" created','success');
-        
+
         return redirect()->route('student.index');
     }
 
