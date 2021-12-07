@@ -21,7 +21,7 @@ class StudentController extends Controller
     public function index()
     {
         $students = Student::with('grade')->latest()->paginate(30);
-        $search = '';
+        $search = 'Cari';
 
         return view('admin.students.index', compact('students', 'search'));
     }

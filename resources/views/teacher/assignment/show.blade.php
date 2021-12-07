@@ -20,11 +20,11 @@
             <div class="w-1/6 px-4 py-3">Nama</div>
             <div class="w-1/6 px-4 py-3">Status</div>
             <div class="w-2/6 px-4 py-3">Catatan</div>
-            <div class="w-1/6 px-4 py-3 text-right">Download</div>
+            <div class="w-1/6 px-4 py-3 text-right">File</div>
         </div>
 
         @php $index=1 @endphp
-        
+
         @foreach ($assignment->files as $assignment)
 
             <div class="flex flex-wrap items-center text-gray-700 border-t-2 border-l-4 border-r-4 border-gray-300">
@@ -51,7 +51,7 @@
                         <a href="{{ route('assignment-manager.download',$assignment->file) }}" class="ml-1 block p-2">
                                 <svg class="fill-current w-4 h-4 mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M13 8V2H7v6H2l8 8 8-8h-5zM0 18h20v2H0v-2z"/></svg>
                         </a>
-                    @endif                       
+                    @endif
                 </div>
             </div>
 

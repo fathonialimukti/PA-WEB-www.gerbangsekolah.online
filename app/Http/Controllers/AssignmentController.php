@@ -128,7 +128,7 @@ class AssignmentController extends Controller
     {
         $request->validate([
             'note'      => 'nullable|string|max:255',
-            'file'      => 'required|max:10000|mimes:pdf' //max 10Mb add mimes:doc,docx for extension type and must be pdf
+            'file'      => 'required|max:10000|mimes:pdf' //max 10Mb and must be pdf
         ]);
 
         $AssignmentFile = AssignmentFile::where([['assignment_id', $id], ['student_id', auth()->user()->student->id]])->firstOrFail();
@@ -146,7 +146,8 @@ class AssignmentController extends Controller
 
     public function downloadFile($filename)
     {
-        return response()->download(public_path('assignment/' . $filename));
+        return response()->view(public_path('assignment/' . $filename));
+
     }
 
     public function score($id, Request $request)
